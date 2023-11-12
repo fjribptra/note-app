@@ -16,17 +16,22 @@ addBtn.addEventListener('click', () => {
     notesContainer.appendChild(div)
     div.appendChild(p)
     div.appendChild(button)
-    saveNotes()
-})
-
-document.addEventListener('input', () => {
-    saveNotes()
 })
 
 notesContainer.addEventListener('click', (e) => {
     if(e.target.className == 'remove-notes') {
         e.target.parentElement.remove()
         saveNotes()
+        
+    } else if(e.target.className == 'notes') {
+        const notes = document.querySelectorAll('.notes')
+        notes.forEach(nt => {
+            nt.addEventListener('keyup', function(event) {
+                if(event.key != 'Enter' && event.key != '') {
+                    saveNotes()
+                }
+            })
+        })
     }
 })
 
